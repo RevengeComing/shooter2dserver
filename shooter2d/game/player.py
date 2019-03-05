@@ -1,6 +1,7 @@
 from math import sqrt
 
-from shooter2d.game.stone import Stone
+from .stone import Stone
+from .clock import clocked_function
 
 from ..cmd.config import Config
 
@@ -19,11 +20,7 @@ class Player:
     def set_name(self, name):
         self.name = name
 
-    def move(self):
-        self.x += self.speed_x
-        self.y += self.speed_y
-
-    def set_speed(self, speed_x, speed_y):
+    def move(self, speed_x, speed_y):
         self.speed_x = speed_x
         self.speed_y = speed_y
 
@@ -32,6 +29,11 @@ class Player:
 
     def blink(self, blink_position_x, blink_position_y):
         pass
+
+    @clocked_function
+    def update(self, dt):
+        self.x += self.speed_x * dt
+        self.y += self.speed_y * dt
 
 
 def calc_line_size(first_x, first_y, second_x, second_y):

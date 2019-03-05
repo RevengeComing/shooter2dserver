@@ -57,17 +57,18 @@ def create_app(game: Game, player_class, request_class, response_class, config) 
     async def add_response_header(request, response):
         response.headers['Access-Control-Allow-Origin'] = "*"
 
-    async def clock():
+    async def update():
         while True:
             now = time.time()
+            game.update()
             info = game.get_info()
             response = response_class(info)
             data = response()
 
             for connection in connections:
                 app.add_task(send_data(connection, data, connections))
-            print("Clock in %f" % (time.time() - now))
+            print("update in %f" % (time.time() - now))
             await asyncio.sleep(0.1)
 
-    app.add_task(clock())
+    app.add_task(update())
     return app

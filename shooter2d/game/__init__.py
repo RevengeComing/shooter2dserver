@@ -39,8 +39,9 @@ class Game:
             map_info.append(player_info)
         return map_info
 
-    def clock(self):
-        pass
+    def update(self):
+        for player in self.players:
+            player.update()
 
 
 def _create_empty_map(height, width):

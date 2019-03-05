@@ -2,6 +2,7 @@ from random import randint
 from .player import Player
 import jwt
 from shooter2d.cmd.config import Config
+from shooter2d.math import nearly_equal
 
 
 def process_join(game, payload=None, player=None):
@@ -18,8 +19,9 @@ def process_get_map(game, payload=None, player=None):
 
 
 def process_move(game, payload, player):
-    player.move(payload["speed_x"], payload["speed_y"])
-    return {"request": "process_move", "status": "done", "current_position_x": player.x, "current_position_y": player.y}
+    if nearly_equal(payload['speed_x'] ** 2 + payload['speed_y'] ** 2, 1):
+        player.move(payload["speed_x"], payload["speed_y"])
+    return {"request": "process_move", "status": "done"}
 
 
 def process_set_name(game, payload, player):

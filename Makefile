@@ -6,3 +6,6 @@ clean:
 
 install: clean
 	python setup.py install
+
+test:
+	python -m unittest discover
