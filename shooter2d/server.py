@@ -34,6 +34,7 @@ def create_app(game: Game, player_class, request_class, response_class) -> Sanic
 
     @app.route("/join")
     async def join(request):
+        pass
 
     async def clock():
         while True:
