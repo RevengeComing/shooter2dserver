@@ -3,14 +3,18 @@ import time
 
 import jwt
 
+import websockets
 from sanic import Sanic
 from sanic.response import json
 
 from .game import Game
 
 
-async def send_data(connection, data):
-    await connection.send(data)
+async def send_data(connection, data, connections):
+    try:
+        await connection.send(data)
+    except websockets.exceptions.ConnectionClosed:
+        connections.remove(connection)
 
 
 def create_app(game: Game, player_class, request_class, response_class, config) -> Sanic:
@@ -58,7 +62,7 @@ def create_app(game: Game, player_class, request_class, response_class, config) 
             data = response()
 
             for connection in connections:
-                app.add_task(send_data(connection, data))
+                app.add_task(send_data(connection, data, connections))
             print("Clock in %f" % (time.time() - now))
             await asyncio.sleep(0.1)
 
