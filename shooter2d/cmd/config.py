@@ -11,7 +11,7 @@ class Config:
         BULLET_SPEED = os.getenv("BULLET_SPEED") or 2
         BULLET_TTL = os.getenv("BULLET_TTL") or 5
 
-        PLAYER_SPEED = int(os.getenv("PLAYER_SPEED", 0)) or 1000
+        PLAYER_SPEED = float(os.getenv("PLAYER_SPEED", 0)) or 0.5
 
     class Server:
         SECRET_KEY = os.getenv(
