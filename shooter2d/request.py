@@ -15,9 +15,13 @@ class Request:
         self._decode()
 
     def _decode(self):
-        data = json.loads(self.body)
-        self.action = data["action"]
-        self.action_data = data["action_data"]
+        print(self.body)
+        try:
+            data = json.loads(self.body)
+            self.action = data["action"]
+            self.action_data = data["action_data"]
+        except:
+            print("koskesh ridi ba in datat")
 
 
 class Response:
