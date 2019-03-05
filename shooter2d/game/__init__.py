@@ -1,4 +1,6 @@
 import orjson as json
+from random import randint
+
 from .player import Player
 from .actions import actions
 
@@ -10,6 +12,9 @@ class Game:
         self.height = height
         self.width = width
         self.map = _create_empty_map(height, width)
+        self.l_shape_walls = _create_walls(self.width, self.height)
+        self.circle_shape_walls = _create_walls(self.width, self.height)
+        self.single_point_walls = _create_walls(self.width, self.height)
 
     def add_player(self, player_instance: Player):
         self.players.add(player_instance)
@@ -37,3 +42,12 @@ class Game:
 
 def _create_empty_map(height, width):
     return []
+
+
+def _create_walls(max_width, max_height):
+    numbers = randint(30, 50)
+    positions = set()
+    for i in range(numbers):
+        positions.add((randint(max_width), randint(max_height)))
+
+    return positions
