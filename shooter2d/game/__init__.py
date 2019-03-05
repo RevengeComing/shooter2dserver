@@ -23,7 +23,7 @@ class Game:
         self.players.remove(player_instance)
 
     def process_request(self, player_instance: Player, request):
-        return actions[request.action](self, request.action_data, player_instance)
+        return actions[request.action](self, request.payload, player_instance)
 
     def get_info(self):
         map_info = []

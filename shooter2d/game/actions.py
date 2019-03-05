@@ -4,8 +4,8 @@ import jwt
 from shooter2d.cmd.config import Config
 
 
-def process_join(game, data=None, player=None):
-    username = jwt.decode(data['token'], Config.Server.SECRET_KEY, algorithms=[
+def process_join(game, payload=None, player=None):
+    username = jwt.decode(payload['token'], Config.Server.SECRET_KEY, algorithms=[
                           'HS256'])['username']
     new_player_x, new_player_y = get_new_player_position(game)
     player = Player(new_player_x, new_player_y, username)
@@ -13,17 +13,17 @@ def process_join(game, data=None, player=None):
     return {"request": "join_game", "status": "done", "current_position_x": player.x, "current_position_y": player.y}, player
 
 
-def process_get_map(game, data=None, player=None):
+def process_get_map(game, payload=None, player=None):
     return {"request": "get_map", "map": game.map}
 
 
-def process_move(game, data, player):
-    player.move(data["speed_x"], data["speed_y"])
+def process_move(game, payload, player):
+    player.move(payload["speed_x"], payload["speed_y"])
     return {"request": "process_move", "status": "done", "current_position_x": player.x, "current_position_y": player.y}
 
 
-def process_set_name(game, data, player):
-    player.set_name(data["name"])
+def process_set_name(game, payload, player):
+    player.set_name(payload["name"])
     return {"request": "set_name", "status": "done", "player_name": player.name}
 
 

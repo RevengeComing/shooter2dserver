@@ -8,7 +8,7 @@ except:
 
 
 class Request:
-    __slots__ = ["body", "action", "action_data"]
+    __slots__ = ["body", "action", "payload"]
 
     def __init__(self, body):
         self.body = body
@@ -19,7 +19,7 @@ class Request:
         try:
             data = json.loads(self.body)
             self.action = data["action"]
-            self.action_data = data["action_data"]
+            self.payload = data["payload"]
         except:
             print("koskesh ridi ba in datat")
 
