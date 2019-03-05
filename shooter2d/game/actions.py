@@ -20,6 +20,7 @@ def process_join(game, payload=None, player=None):
                 "map_height": Config.Game.MAP_HEIGHT,
                 "map_width": Config.Game.MAP_WIDTH,
                 "player_speed": Config.Game.PLAYER_SPEED,
+                "blind_range": Config.Game.BLINK_RANGE,
             },
         },
     }, player
@@ -30,8 +31,8 @@ def process_get_map(game, payload=None, player=None):
 
 
 def process_move(game, payload, player):
-    if nearly_equal(payload['speed_x'] ** 2 + payload['speed_y'] ** 2, 1):
-        player.move(payload["speed_x"], payload["speed_y"])
+    if nearly_equal(payload['velocity_x'] ** 2 + payload['velocity_y'] ** 2, 1):
+        player.move(payload["velocity_x"], payload["velocity_y"])
         return {"type": "confirm", "payload": {"move": "done"}}
     return {"type": "confirm", "payload": {"move": "failed"}}
 
