@@ -34,6 +34,10 @@ def create_app(game: Game, player_class, request_class, response_class) -> Sanic
         finally:
             game.remove_player(player)
 
+    @app.route("/join")
+    async def join(request):
+        return json({"asdqwe": "asdqwe"})
+
     async def clock():
         while True:
             now = time.time()
@@ -44,7 +48,6 @@ def create_app(game: Game, player_class, request_class, response_class) -> Sanic
                     await connection.send(response())
                 except ConnectionError:
                     connections.remove(connection)
-            print("sent in %s time", time.time() - now)
             asyncio.sleep(0.1)
 
     app.add_task(clock())

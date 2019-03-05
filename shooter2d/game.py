@@ -1,7 +1,5 @@
 from random import randint
 
-from shooter2d.constants import GAME_MAP_WIDTH, GAME_MAP_HEIGHT
-
 
 def process_join_game(game, data=None, player=None):
     new_player_x, new_player_y = get_new_player_position(game)
@@ -25,8 +23,8 @@ def process_set_name(game, data, player):
 
 
 def get_new_player_position(game):
-    new_player_position_x = randint(GAME_MAP_WIDTH)
-    new_player_position_y = randint(GAME_MAP_HEIGHT)
+    new_player_position_x = randint(0, game.height)
+    new_player_position_y = randint(0, game.width)
     for player in game.players:
         if player.x == new_player_position_x and player.y == new_player_position_y:
             return get_new_player_position(game)
