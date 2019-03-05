@@ -5,7 +5,7 @@ from shooter2d.cmd.config import Config
 
 
 def process_join(game, payload=None, player=None):
-    username = jwt.decode(payload['token'], Config.Server.SECRET_KEY, algorithms=[
+    username = jwt.decode(payload['token'].encode(), Config.Server.SECRET_KEY, algorithms=[
                           'HS256'])['username']
     new_player_x, new_player_y = get_new_player_position(game)
     player = Player(new_player_x, new_player_y, username)
