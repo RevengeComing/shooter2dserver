@@ -36,7 +36,7 @@ class Game:
                 "speed_y": player.speed_y,
                 "name": player.name,
             }
-            map_info.append(player)
+            map_info.append(player_info)
         return map_info
 
     def clock(self):
