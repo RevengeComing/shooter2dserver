@@ -41,8 +41,8 @@ class Player:
 
     @clocked_function
     def update(self, dt):
-        self.x += self.velocity_x * dt
-        self.y += self.velocity_y * dt
+        self.x += self.velocity_x * dt * Config.Game.PLAYER_SPEED
+        self.y += self.velocity_y * dt * Config.Game.PLAYER_SPEED
 
 
 def calc_line_size(first_x, first_y, second_x, second_y):
