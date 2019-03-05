@@ -38,6 +38,11 @@ def process_move(game, payload, player):
     return {"type": "confirm", "payload": {"move": "failed"}}
 
 
+def process_direction(game, payload, player):
+    player.direction = payload['direction']
+    return {"type": "confirm", "playload": {"direction": "done"}}
+
+
 def process_shoot(game, payload, player):
     direction = payload['direction']
     if player.has_ammo():
@@ -62,4 +67,4 @@ def get_new_player_position(game):
 
 
 actions = {"move": process_move, "get_map": process_get_map,
-           "join": process_join, "shoot": process_shoot}
+           "join": process_join, "shoot": process_shoot, "direction": process_direction}

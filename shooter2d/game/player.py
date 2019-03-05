@@ -15,6 +15,7 @@ class Player:
         self.health = 100
         self.ammo_count = 5
         self.has_blink = True
+        self.direction = 0
 
     def set_name(self, name):
         self.name = name

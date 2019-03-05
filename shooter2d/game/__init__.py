@@ -35,6 +35,7 @@ class Game:
                 "hp": player.health,
                 "position": {"x": player.x, "y": player.y},
                 "velocity": {"x": player.velocity_x, "y": player.velocity_y},
+                "direction": player.direction,
                 "name": player.name,
             }
             print(player_info)
