@@ -1,13 +1,15 @@
 import asyncio
 import time
 
+import jwt
+
 from sanic import Sanic
 from sanic.response import json
 
 from .game import Game
 
 
-def create_app(game: Game, player_class, request_class, response_class) -> Sanic:
+def create_app(game: Game, player_class, request_class, response_class, config) -> Sanic:
     app = Sanic()
 
     connections = set()
@@ -32,9 +34,11 @@ def create_app(game: Game, player_class, request_class, response_class) -> Sanic
         finally:
             game.remove_player(player)
 
-    @app.route("/join")
+    @app.route("/join", methods=["POST"])
     async def join(request):
-        pass
+        username = request.json.get("username") or request.form.get("username")
+        return jwt.encode({'username': username, "server_address": "localhost:8000/game"},
+                          config.SECRET_KEY, algorithm='HS256')
 
     async def clock():
         while True:
@@ -46,6 +50,7 @@ def create_app(game: Game, player_class, request_class, response_class) -> Sanic
                     await connection.send(response())
                 except ConnectionError:
                     connections.remove(connection)
+            print("Clock in %f" % (time.time() - now))
             await asyncio.sleep(0.1)
 
     app.add_task(clock())
