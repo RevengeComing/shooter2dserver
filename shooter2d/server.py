@@ -40,7 +40,10 @@ def create_app(game: Game, player_class, request_class, response_class, config) 
                     response = response_class(data)
                     await ws.send(response())
         finally:
-            game.remove_player(player)
+            if player:
+                game.remove_player(player)
+
+        return json({"status": "end"})
 
     @app.route("/login", methods=["POST"])
     async def login(request):
