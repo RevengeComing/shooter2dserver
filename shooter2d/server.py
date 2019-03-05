@@ -41,7 +41,8 @@ def create_app(game: Game, player_class, request_class, response_class, config) 
     @app.route("/login", methods=["POST"])
     async def login(request):
         username = request.json.get("username") or request.form.get("username")
-        server_address = config.SCHEMA + "://" + config.DOMAIN + "/game"
+        server_address = config.SCHEMA + "://" + \
+            config.DOMAIN + ":" + config.PORT + "/game"
         return json({"token": jwt.encode({'username': username},
                                          config.SECRET_KEY, algorithm='HS256'), "websocket": server_address})
 
