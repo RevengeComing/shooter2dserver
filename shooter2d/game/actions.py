@@ -21,7 +21,16 @@ def process_get_map(game, payload=None, player=None):
 def process_move(game, payload, player):
     if nearly_equal(payload['speed_x'] ** 2 + payload['speed_y'] ** 2, 1):
         player.move(payload["speed_x"], payload["speed_y"])
-    return {"request": "process_move", "status": "done"}
+        return {"status": "done"}
+    return {"status": "error"}
+
+
+def process_shoot(game, payload, player):
+    direction = payload['direction']
+    if player.has_ammo():
+        game.shoot(player, direction)
+        return {"status": "done"}
+    return {"status": "undone"}
 
 
 def process_set_name(game, payload, player):
@@ -40,4 +49,4 @@ def get_new_player_position(game):
 
 
 actions = {"move": process_move, "get_map": process_get_map,
-           "join": process_join}
+           "join": process_join, "shoot": process_shoot}

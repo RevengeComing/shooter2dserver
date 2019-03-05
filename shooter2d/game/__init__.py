@@ -3,6 +3,8 @@ from random import randint
 
 from .player import Player
 from .actions import actions
+from .bullet import Bullet
+from .clock import clocked_function
 
 
 class Game:
@@ -15,6 +17,7 @@ class Game:
         self.l_shape_walls = _create_walls(self.width, self.height)
         self.circle_shape_walls = _create_walls(self.width, self.height)
         self.single_point_walls = _create_walls(self.width, self.height)
+        self.app = None
 
     def add_player(self, player_instance: Player):
         self.players.add(player_instance)
@@ -30,14 +33,18 @@ class Game:
         for player in self.players:
             player_info = {
                 "hp": player.health,
-                "position_x": player.x,
-                "position_y": player.y,
-                "speed_x": player.speed_x,
-                "speed_y": player.speed_y,
+                "position": {"x": player.x, "y": player.y},
+                "velocity": {"x": player.velocity_x, "y": player.velocity_y},
                 "name": player.name,
             }
+            print(player_info)
             map_info.append(player_info)
         return map_info
+
+    def shoot(self, player, direction):
+        bullet = Bullet(player, direction)
+        self.app.add_task(bullet.shoot_task())
+        player.shoot()
 
     def update(self):
         for player in self.players:

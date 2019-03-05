@@ -19,6 +19,7 @@ async def send_data(connection, data, connections):
 
 def create_app(game: Game, player_class, request_class, response_class, config) -> Sanic:
     app = Sanic()
+    game.app = app
 
     connections = set()
 
@@ -67,7 +68,7 @@ def create_app(game: Game, player_class, request_class, response_class, config) 
 
             for connection in connections:
                 app.add_task(send_data(connection, data, connections))
-            print("update in %f" % (time.time() - now))
+            # print("update in %f" % (time.time() - now))
             await asyncio.sleep(0.1)
 
     app.add_task(update())

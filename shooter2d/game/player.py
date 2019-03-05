@@ -1,6 +1,5 @@
 from math import sqrt
 
-from .stone import Stone
 from .clock import clocked_function
 
 from ..cmd.config import Config
@@ -11,18 +10,27 @@ class Player:
         self.x = x
         self.y = y
         self.name = name
-        self.speed_x = 0
-        self.speed_y = 0
+        self.velocity_x = 0
+        self.velocity_y = 0
         self.health = 100
-        self.stone_numbers = 5
+        self.ammo_count = 5
         self.has_blink = True
 
     def set_name(self, name):
         self.name = name
 
-    def move(self, speed_x, speed_y):
-        self.speed_x = speed_x
-        self.speed_y = speed_y
+    def move(self, velocity_x, velocity_y):
+        self.velocity_x = velocity_x
+        self.velocity_y = velocity_y
+
+    def add_ammo(self, count):
+        self.ammo_count += count
+
+    def has_ammo(self):
+        return self.ammo_count > 0
+
+    def shoot_ammo(self):
+        self.ammo_count -= 1
 
     def add_hp(self, hp_amount: int):
         self.health = max(100, self.health + hp_amount)
@@ -32,8 +40,8 @@ class Player:
 
     @clocked_function
     def update(self, dt):
-        self.x += self.speed_x * dt
-        self.y += self.speed_y * dt
+        self.x += self.velocity_x * dt
+        self.y += self.velocity_y * dt
 
 
 def calc_line_size(first_x, first_y, second_x, second_y):
