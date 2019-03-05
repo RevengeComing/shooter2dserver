@@ -11,7 +11,15 @@ def process_join(game, payload=None, player=None):
     new_player_x, new_player_y = get_new_player_position(game)
     player = Player(new_player_x, new_player_y, username)
     game.add_player(player)
-    return {"request": "join_game", "status": "done", "current_position_x": player.x, "current_position_y": player.y}, player
+    return {
+        "configs": {
+            "bullet_speed": Config.Game.BULLET_SPEED,
+            "bullet_ttl": Config.Game.BULLET_TTL,
+            "map_height": Config.Game.MAP_HEIGHT,
+            "map_width": Config.Game.MAP_WIDTH,
+            "player_speed": Config.Game.PLAYER_SPEED,
+        },
+    }, player
 
 
 def process_get_map(game, payload=None, player=None):

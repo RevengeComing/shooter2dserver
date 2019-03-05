@@ -5,8 +5,12 @@ class Config:
     class Game:
         MAP_HEIGHT = os.getenv("GAME_MAP_HEIGHT") or 1000
         MAP_WIDTH = os.getenv("GAME_MAP_WIDTH") or 1000
+
         BLINK_RANGE = os.getenv("BLINK_RANGE") or 20
+
         BULLET_SPEED = os.getenv("BULLET_SPEED") or 2
+        BULLET_TTL = os.getenv("BULLET_TTL") or 5
+
         PLAYER_SPEED = os.getenv("PLAYER_SPEED") or 1
 
     class Server:
