@@ -19,3 +19,4 @@ class Config:
         DOMAIN = os.getenv("SHOOTER_HOST") or "localhost"
         PORT = int(os.getenv("SHOOTER_PORT", 0)) or 8000
         SCHEMA = os.getenv("SERVER_SCHEMA") or "ws"
+        SERVER_FPS = int(os.getenv("SERVER_FPS", 0)) or 20

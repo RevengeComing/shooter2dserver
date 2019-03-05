@@ -41,8 +41,8 @@ class Player:
     def update(self):
         now = time.time()
         dt = now - self.last_update
-        self.x += self.velocity_x * dt * Config.Game.PLAYER_SPEED
-        self.y += self.velocity_y * dt * Config.Game.PLAYER_SPEED
+        self.x += self.velocity_x * dt * 1000 * Config.Game.PLAYER_SPEED
+        self.y += self.velocity_y * dt * 1000 * Config.Game.PLAYER_SPEED
         self.last_update = now
 
 
