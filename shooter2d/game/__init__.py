@@ -26,15 +26,18 @@ class Game:
         return actions[request.action](self, request.action_data, player_instance)
 
     def get_info(self):
-        map_info = dict()
-
-        for player_instance in self.players:
-            map_info["player" + player_instance.name] = {"hp": player_instance.health,
-                                                         "position_x": player_instance.x,
-                                                         "position_y": player_instance.y,
-                                                         "speed_x": player_instance.speed_x,
-                                                         "speed_y": player_instance.speed_y}
-        return json.dumps(map_info)
+        map_info = []
+        for player in self.players:
+            player_info = {
+                "hp": player.health,
+                "position_x": player.x,
+                "position_y": player.y,
+                "speed_x": player.speed_x,
+                "speed_y": player.speed_y,
+                "name": player.name,
+            }
+            map_info.append(player)
+        return map_info
 
     def clock(self):
         pass

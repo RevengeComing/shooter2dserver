@@ -10,7 +10,7 @@ class Player:
         self.game_map = game_map
         self.x = x
         self.y = y
-        self.name = name
+        self.name = name.decode("utf8")
         self.speed_x = 0
         self.speed_y = 0
         self.health = 100
@@ -32,7 +32,8 @@ class Player:
         self.health = max(100, self.health + hp_amount)
 
     def shoot_stein(self):
-        Stone(owner=self.name, owner_speed_x=self.speed_x, owner_speed_y=self.speed_y, game_map=self.game_map)
+        Stone(owner=self.name, owner_speed_x=self.speed_x,
+              owner_speed_y=self.speed_y, game_map=self.game_map)
         self.stone_numbers -= 1
 
     def take_stones(self, number_of_stones):
