@@ -8,7 +8,7 @@ except:
 
 
 class Request:
-    __slots__ = ["body", "action"]
+    __slots__ = ["body", "action", "action_data"]
 
     def __init__(self, body):
         self.body = body
