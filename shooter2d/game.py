@@ -1,3 +1,4 @@
+import json
 from random import randint
 
 
@@ -43,6 +44,7 @@ class Player:
         self.name = name
         self.speed_x = 0
         self.speed_y = 0
+        self.health = 100
 
     def set_name(self, name):
         self.name = name
@@ -54,6 +56,9 @@ class Player:
     def set_speed(self, speed_x, speed_y):
         self.speed_x = speed_x
         self.speed_y = speed_y
+
+    def add_hp(self, hp_amount):
+        self.health = max(100, self.health + hp_amount)
 
 
 class Game:
@@ -74,10 +79,15 @@ class Game:
         return actions[request.action](self, request.action_data, player)
 
     def get_info(self):
-        return {}
+        map_info = dict()
 
-    def json_map(self):
-        return []
+        for player in self.players:
+            map_info[player.name] = {"hp": player.health,
+                                     "position_x": player.x,
+                                     "position_y": player.y,
+                                     "speed_x": player.speed_x,
+                                     "speed_y": player.speed_y}
+        return json.dumps(map_info)
 
     def clock(self):
         pass

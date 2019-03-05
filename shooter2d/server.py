@@ -1,12 +1,10 @@
-import time
 import asyncio
-
+import time
 
 from sanic import Sanic
 from sanic.response import json
-from sanic.websocket import WebSocketProtocol
-from .game import Game, Player
-from .request import Request, Response
+
+from .game import Game
 
 
 def create_app(game: Game, player_class, request_class, response_class) -> Sanic:
@@ -48,7 +46,7 @@ def create_app(game: Game, player_class, request_class, response_class) -> Sanic
                     await connection.send(response())
                 except ConnectionError:
                     connections.remove(connection)
-            asyncio.sleep(0.1)
+            await asyncio.sleep(0.1)
 
     app.add_task(clock())
     return app

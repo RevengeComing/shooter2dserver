@@ -1,2 +1,4 @@
 sanic
 orjson
+click
+websocket
