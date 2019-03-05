@@ -1,4 +1,5 @@
 from math import sqrt
+import time
 
 from .clock import clocked_function
 
@@ -16,6 +17,7 @@ class Player:
         self.ammo_count = 5
         self.has_blink = True
         self.direction = 0
+        self.last_update = time.time()
 
     def set_name(self, name):
         self.name = name
@@ -36,13 +38,12 @@ class Player:
     def add_hp(self, hp_amount: int):
         self.health = max(100, self.health + hp_amount)
 
-    def blink(self, blink_position_x, blink_position_y):
-        pass
-
-    @clocked_function
-    def update(self, dt):
+    def update(self):
+        now = time.time()
+        dt = now - self.last_update
         self.x += self.velocity_x * dt * Config.Game.PLAYER_SPEED
         self.y += self.velocity_y * dt * Config.Game.PLAYER_SPEED
+        self.last_update = now
 
 
 def calc_line_size(first_x, first_y, second_x, second_y):
