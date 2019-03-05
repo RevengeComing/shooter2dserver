@@ -63,9 +63,9 @@ def create_app(game: Game, player_class, request_class, response_class, config) 
             now = time.time()
             game.update()
             info = game.get_info()
-            response = response_class(info)
+            data = {"type": "update", "payload": info}
+            response = response_class(data)
             data = response()
-
             for connection in connections:
                 app.add_task(send_data(connection, data, connections))
             # print("update in %f" % (time.time() - now))
