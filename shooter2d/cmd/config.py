@@ -5,6 +5,7 @@ class Config:
     class Game:
         MAP_HEIGHT = os.getenv("GAME_MAP_HEIGHT") or 1000
         MAP_WIDTH = os.getenv("GAME_MAP_WIDTH") or 1000
+        BLINK_RANGE = os.getenv("BLINK_RANGE") or 20
 
     class Server:
         SECRET_KEY = os.getenv(

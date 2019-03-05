@@ -1,8 +1,12 @@
+from math import sqrt
+
 from shooter2d.game.stone import Stone
+
+from ..cmd.config import Config
 
 
 class Player:
-    def __init__(self, x, y, game_map ,name=""):
+    def __init__(self, x, y, game_map, name=""):
         self.game_map = game_map
         self.x = x
         self.y = y
@@ -11,6 +15,7 @@ class Player:
         self.speed_y = 0
         self.health = 100
         self.stone_numbers = 5
+        self.has_blink = True
 
     def set_name(self, name):
         self.name = name
@@ -32,3 +37,25 @@ class Player:
 
     def take_stones(self, number_of_stones):
         self.stone_numbers += number_of_stones
+
+    def blink(self, blink_position_x, blink_position_y):
+        if self.has_blink:
+            self.has_blink = False
+            self.x = blink_position_x if calc_line_size(first_x=self.x,
+                                                        first_y=self.y,
+                                                        second_x=blink_position_x,
+                                                        second_y=blink_position_y) < Config.BLINK_RANGE \
+                else calc_nearest_position(first_x=self.x,
+                                           first_y=self.y,
+                                           second_x=blink_position_x,
+                                           second_y=blink_position_y)
+        else:
+            return
+
+
+def calc_line_size(first_x, first_y, second_x, second_y):
+    return sqrt(pow(first_x - second_x, 2) + pow(first_y - second_y, 2))
+
+
+def calc_nearest_position(first_x, first_y, second_x, second_y):
+    pass
