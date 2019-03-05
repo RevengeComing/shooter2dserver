@@ -19,5 +19,5 @@ class Player:
         self.speed_x = speed_x
         self.speed_y = speed_y
 
-    def add_hp(self, hp_amount):
+    def add_hp(self, hp_amount: int):
         self.health = max(100, self.health + hp_amount)
