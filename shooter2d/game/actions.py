@@ -31,8 +31,8 @@ def process_get_map(game, payload=None, player=None):
 
 
 def process_move(game, payload, player):
-    if nearly_equal(payload['velocity_x'] ** 2 + payload['velocity_y'] ** 2, 1):
-        player.move(payload["velocity_x"], payload["velocity_y"])
+    if nearly_equal(payload['velocity']['x'] ** 2 + payload['velocity']['y'] ** 2, 1):
+        player.move(payload["velocity"]["x"], payload["velocity"]["y"])
         return {"type": "confirm", "payload": {"move": "done"}}
     return {"type": "confirm", "payload": {"move": "failed"}}
 
