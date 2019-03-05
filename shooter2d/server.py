@@ -5,8 +5,8 @@ import asyncio
 from sanic import Sanic
 from sanic.response import json
 from sanic.websocket import WebSocketProtocol
-from game import Game, Player
-from request import Request, Response
+from .game import Game, Player
+from .request import Request, Response
 
 
 def create_app(game: Game, player_class, request_class, response_class) -> Sanic:
@@ -53,9 +53,3 @@ def create_app(game: Game, player_class, request_class, response_class) -> Sanic
     app.add_task(update())
     app.add_task(garbage_collector_task())
     return app
-
-
-if __name__ == "__main__":
-    game = Game(1000, 1000)
-
-    create_app(game, Player, Request, Response).run(host="0.0.0.0", port=8000, protocol=WebSocketProtocol)
