@@ -6,7 +6,7 @@ def process_join_game(game, data=None, player=None):
     new_player_x, new_player_y = get_new_player_position(game)
     player = Player(new_player_x, new_player_y)
     game.add_player(player)
-    return {"request": "join_game", "status": "done", "current_position_x": player.x, "current_position_y": player.y}
+    return {"request": "join_game", "status": "done", "current_position_x": player.x, "current_position_y": player.y}, player
 
 
 def process_get_map(game, data=None, player=None):
@@ -33,5 +33,5 @@ def get_new_player_position(game):
     return new_player_position_x, new_player_position_y
 
 
-actions = {"move": process_move, "get_map": process_get_map, "set_name": process_set_name,
-           "join_game": process_join_game}
+actions = {"move": process_move, "get_map": process_get_map,
+           "join": process_join_game}

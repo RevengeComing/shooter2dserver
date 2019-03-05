@@ -10,3 +10,5 @@ class Config:
     class Server:
         SECRET_KEY = os.getenv(
             "SECRET_KEY") or "SECREEEEEEET KEEEEEEEEEEY !!!!!!!! PJQWIN"
+        DOMAIN = os.getenv("SHOOTER_DOMAIN") or "localhost:8000"
+        SCHEMA = os.getenv("SERVER_SCHEMA") or "ws"

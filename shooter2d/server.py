@@ -9,6 +9,10 @@ from sanic.response import json
 from .game import Game
 
 
+async def send_data(connection, data):
+    await connection.send(data)
+
+
 def create_app(game: Game, player_class, request_class, response_class, config) -> Sanic:
     app = Sanic()
 
@@ -34,22 +38,22 @@ def create_app(game: Game, player_class, request_class, response_class, config) 
         finally:
             game.remove_player(player)
 
-    @app.route("/join", methods=["POST"])
-    async def join(request):
+    @app.route("/login", methods=["POST"])
+    async def login(request):
         username = request.json.get("username") or request.form.get("username")
-        return jwt.encode({'username': username, "server_address": "localhost:8000/game"},
-                          config.SECRET_KEY, algorithm='HS256')
+        server_address = config.SCHEMA + "://" + config.DOMAIN + "/game"
+        return json({"token": jwt.encode({'username': username},
+                                         config.SECRET_KEY, algorithm='HS256'), "server_address": server_address})
 
     async def clock():
         while True:
             now = time.time()
             info = game.get_info()
             response = response_class(info)
+            data = response()
+
             for connection in connections:
-                try:
-                    await connection.send(response())
-                except ConnectionError:
-                    connections.remove(connection)
+                app.add_task(send_data(connection, data))
             print("Clock in %f" % (time.time() - now))
             await asyncio.sleep(0.1)
 

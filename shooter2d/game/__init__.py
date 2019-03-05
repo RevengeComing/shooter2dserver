@@ -48,6 +48,6 @@ def _create_walls(max_width, max_height):
     numbers = randint(30, 50)
     positions = set()
     for i in range(numbers):
-        positions.add((randint(max_width), randint(max_height)))
+        positions.add((randint(0, max_width), randint(0, max_height)))
 
     return positions
