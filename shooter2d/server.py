@@ -45,6 +45,10 @@ def create_app(game: Game, player_class, request_class, response_class, config) 
         return json({"token": jwt.encode({'username': username},
                                          config.SECRET_KEY, algorithm='HS256'), "server_address": server_address})
 
+    @app.register_middleware('response')
+    async def add_response_header(request, response):
+        response.headers['Access-Control-Allow-Origin'] = "*"
+
     async def clock():
         while True:
             now = time.time()
