@@ -3,8 +3,8 @@ import os
 
 class Config:
     class Game:
-        MAP_HEIGHT = os.getenv("GAME_MAP_HEIGHT") or 1000
-        MAP_WIDTH = os.getenv("GAME_MAP_WIDTH") or 1000
+        MAP_HEIGHT = int(os.getenv("GAME_MAP_HEIGHT", 0)) or 100000
+        MAP_WIDTH = int(os.getenv("GAME_MAP_WIDTH", 0)) or 100000
 
         BLINK_RANGE = os.getenv("BLINK_RANGE") or 20
 
