@@ -9,7 +9,7 @@ class Player:
     def __init__(self, x, y, name):
         self.x = x
         self.y = y
-        self.name = name.decode("utf8")
+        self.name = name
         self.speed_x = 0
         self.speed_y = 0
         self.health = 100
