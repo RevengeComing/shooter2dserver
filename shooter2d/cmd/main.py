@@ -19,7 +19,7 @@ def cli():
 def dev():
     game = Game(Config.Game.MAP_HEIGHT, Config.Game.MAP_WIDTH)
     create_app(game, Player, Request, Response, Config.Server).run(
-        host="localhost", port=8000)
+        host=Config.Server.DOMAIN, port=Config.Server.PORT)
 
 
 if __name__ == "__main__":
