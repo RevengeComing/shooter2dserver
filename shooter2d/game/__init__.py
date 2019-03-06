@@ -42,7 +42,6 @@ class Game:
                 "direction": player.direction,
                 "name": player.name,
             }
-            print(player_info)
             map_info.append(player_info)
 
         for bullet in self.bullets:
