@@ -1,8 +1,6 @@
 from math import sqrt
 import time
 
-from .clock import clocked_function
-
 from ..cmd.config import Config
 
 

@@ -5,7 +5,6 @@ from random import randint
 from .player import Player
 from .actions import actions
 from .bullet import Bullet
-from .clock import clocked_function
 
 
 class Game:
