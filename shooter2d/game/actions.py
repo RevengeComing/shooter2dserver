@@ -34,7 +34,7 @@ def process_move(game, payload, player):
     if (nearly_equal(payload['velocity']['x'] ** 2 + payload['velocity']['y'] ** 2, 1) or
             (payload['velocity']['x'] == 0 and payload['velocity']['y'] == 0)):
         player.move(payload["velocity"]["x"], payload["velocity"]["y"])
-        return {"type": "confirm", "payload": {"move": "done"}}
+        return {"type": "confirm", "payload": {"move": "vpn"}}
     return {"type": "confirm", "payload": {"move": "failed"}}
 
 
@@ -49,11 +49,6 @@ def process_shoot(game, payload, player):
         game.shoot(player, direction)
         return {"type": "confirm", "payload": {"shoot": "done"}}
     return {"type": "confirm", "payload": {"shoot": "failed"}}
-
-
-def process_set_name(game, payload, player):
-    player.set_name(payload["name"])
-    return {"type": "set_name", "payload": {"player_name": player.name}}
 
 
 def get_new_player_position(game):

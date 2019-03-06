@@ -11,6 +11,7 @@ class Game:
     def __init__(self, height, width):
         self.players = set()
         self.connections = set()
+        self.bullets = set()
         self.height = height
         self.width = width
         self.map = _create_empty_map(height, width)
@@ -32,6 +33,7 @@ class Game:
         map_info = []
         for player in self.players:
             player_info = {
+                "type": "player",
                 "hp": player.health,
                 "position": {"x": player.x, "y": player.y},
                 "velocity": {"x": player.velocity_x, "y": player.velocity_y},
@@ -40,6 +42,11 @@ class Game:
             }
             print(player_info)
             map_info.append(player_info)
+        
+        for bullet in self.bullets:
+            bullet_info = {
+                'type':"bullet",
+            }
         return map_info
 
     def shoot(self, player, direction):
