@@ -43,13 +43,13 @@ class Player:
         now = time.time()
         dt = now - self.last_update
 
-        self.x += self.velocity_x * dt * 1000 * Config.Game.PLAYER_SPEED
+        self.x += self.velocity_x * dt * Config.Game.PLAYER_SPEED
         if self.x > Config.Game.MAP_WIDTH:
             self.x = Config.Game.MAP_WIDTH
         elif self.x < 0:
             self.x = 0
 
-        self.y += self.velocity_y * dt * 1000 * Config.Game.PLAYER_SPEED
+        self.y += self.velocity_y * dt * Config.Game.PLAYER_SPEED
         if self.y > Config.Game.MAP_HEIGHT:
             self.y = Config.Game.MAP_HEIGHT
         elif self.y < 0:
