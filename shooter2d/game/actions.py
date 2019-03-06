@@ -8,7 +8,7 @@ from shooter2d.math import nearly_equal
 def process_join(game, payload=None, player=None):
     username = jwt.decode(payload['token'].encode(), Config.Server.SECRET_KEY, algorithms=[
                           'HS256'])['username']
-    new_player_x, new_player_y = get_new_player_position(game)
+    new_player_x, new_player_y = 0, 0
     player = Player(new_player_x, new_player_y, username)
     game.add_player(player)
     return {
