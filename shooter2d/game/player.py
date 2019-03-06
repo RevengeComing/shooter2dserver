@@ -17,6 +17,7 @@ class Player:
         self.ammo_count = 5
         self.has_blink = True
         self.direction = 0
+        self.radius = Config.Game.PLAYER_RADIUS
         self.last_update = time.time()
 
     def set_name(self, name):
@@ -41,8 +42,19 @@ class Player:
     def update(self):
         now = time.time()
         dt = now - self.last_update
+
         self.x += self.velocity_x * dt * 1000 * Config.Game.PLAYER_SPEED
+        if self.x > Config.Game.MAP_WIDTH:
+            self.x = Config.Game.MAP_WIDTH
+        elif self.x < 0:
+            self.x = 0
+
         self.y += self.velocity_y * dt * 1000 * Config.Game.PLAYER_SPEED
+        if self.y > Config.Game.MAP_HEIGHT:
+            self.y = Config.Game.MAP_HEIGHT
+        elif self.y < 0:
+            self.y = 0
+
         self.last_update = now
 
 

@@ -17,7 +17,7 @@ def cli():
 
 @cli.command()
 def dev():
-    game = Game(Config.Game.MAP_HEIGHT, Config.Game.MAP_WIDTH)
+    game = Game(Config.Game)
     create_app(game, Player, Request, Response, Config.Server).run(
         host=Config.Server.DOMAIN, port=Config.Server.PORT)
 
