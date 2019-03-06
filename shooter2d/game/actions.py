@@ -20,7 +20,7 @@ def process_join(game, payload=None, player=None):
                 "map_height": Config.Game.MAP_HEIGHT,
                 "map_width": Config.Game.MAP_WIDTH,
                 "player_speed": Config.Game.PLAYER_SPEED,
-                "max_blind_range": Config.Game.BLINK_RANGE,
+                "max_blind_range": Config.Game.MAX_BLINK_RANGE,
             },
         },
     }, player
